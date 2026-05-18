@@ -1,0 +1,27 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Dmitry Yarotsky"
+  navbar: false
+
+    
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: styles.css
+    toc: true
+    toc-location: left
+    html-math-method: mathjax
+    grid:
+      sidebar-width: 250px
+      body-width: 800px
+      margin-width: 250px
+      gutter-width: 1.5rem
+    
+reference-location: margin
+citation-location: margin
+bibliography: references.bib

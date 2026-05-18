@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="st.css">
+<meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
+<title>Dmitry Yarotsky's homepage</title>
+<meta content="Dmitry" name="author">
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push([ '_setAccount', 'UA-34138061-1' ]);
+	_gaq.push([ '_trackPageview' ]);
+
+	(function() {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+				: 'http://www')
+				+ '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+<script
+	src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
+	type="text/javascript"></script>
+
+<style type="text/css">
+.crop {
+	margin: 0 -30px 0px 0;
+}
+
+aside {
+	float: right;
+	margin: 0px;
+	margin-top: 0px;
+	margin-left: 10px;
+	border: solid 2px white;
+	/* 	//border: solid 1px black; */
+}
+
+aside2 {
+	clear: left;
+	float: right;
+	margin: 0px;
+	margin-top: 0px;
+	margin-left: 10px;
+	border: solid 2px white;
+	float: right;
+	/* 	//border: solid 1px black; */
+}
+
+h3 {
+	clear: both;
+	/*   //border: solid 1px black; */
+}
+
+h2 {
+	clear: both;
+	/*   //border: solid 1px black; */
+}
+
+.parent {
+	position: relative;
+	top: 0;
+	left: 0;
+}
+
+.image1 {
+	position: relative;
+	top: 0;
+	left: 0;
+}
+
+.image2 {
+	position: absolute;
+	top: 30px;
+	left: 70px;
+}
+</style>
+</head>
+
+<body>
+	<script type="text/javascript" src="top.js"></script>
+	<div>
+		<br>
+		<h1 align="center">Dmitry Yarotsky's home page</h1>
+		<!-- <br> -->
+	</div>
+
+	<div>
+		<div>
+		<h1 align="left">
+			<img title="photo" alt="photo" src="pics/profilepic4093_0.gif.jpg"
+				height="130" hspace="8" align="right" border="1" width="130">
+		</h1>
+		<p>
+			Hi, I'm an applied mathematician at <a
+			href="https://www.skoltech.ru/en/">Skoltech</a>. 
+		</p>
+		<p>
+			I'm interested in various kinds of applied mathematics. Below I
+			describe some of the topics I have worked on.
+		</p>
+		</div>
+		
+		
+		<h3>Deep neural networks</h3>
+		<p>
+		<h4>Elementary superexpressive activations</h4>
+		<aside>
+			<img title="Network embedding overview" alt="Network overview"
+				src="pics/superexpressiveNet3.png" hspace="0"
+				align="right" border="0" width="350">
+		</aside>
+		
+			<p>
+			The well-known <a
+			href="https://en.wikipedia.org/wiki/Universal_approximation_theorem">
+			universal approximation theorem</a> states that neural networks 
+			can approximate any function with arbitrarily small error if we make the network large enough. 
+			But can we achieve this <i>without</i>  increasing the network? 
+			Maiorov and Pinkus <a href="https://pinkus.net.technion.ac.il/files/2021/02/neurocomp.pdf">
+			have shown </a> in 1999 that this is possible if we use some very special activation functions - 
+			a fixed-size network can then fit any continuous function on any compact domain with any accuracy 
+			merely by adjusting the weights. The respective activation functions are analytic and monotone, 
+			but otherwise quite complicated, in particular not elementary. 
+			</p>
+			<p>
+			In <a href="http://proceedings.mlr.press/v139/yarotsky21a">this paper</a> 
+			I proposed to call such activations "<i>superexpressive</i>" and proved that there 
+			exists <i>elementary</i> superexpressive activations. 
+			The proof relies significantly on the <a href="https://en.wikipedia.org/wiki/Linear_flow_on_the_torus">
+			density of irrational flow on the torus</a>. 
+			For example, the network in the picture with activations \(\sin\) and \(\arcsin\) 
+			is such a superexpressive network (likely not optimal in terms of size) for two-variable functions.
+			At the same time, common non-periodic activations such as sigmoid, ReLU, ELU, softplus, etc. are <i>not</i> superexpressive. 
+			</p>
+		</p>
+		
+		<div>
+		<h4>Explicit loss asymptotics in neural network training</h4>
+		<div>
+		<p>
+		<aside>
+			<img title="Network embedding overview" alt="Network overview"
+				src="pics/universalScaling3.png" hspace="0"
+				align="right" border="0" width="100">
+		</aside>
+		<aside>
+			<img title="Network embedding overview" alt="Network overview"
+				src="pics/universalScaling9.png" hspace="0"
+				align="right" border="0" width="200">
+		</aside>
+		
+			Network training by gradient descent based algorithms is a complex process that is generally hard to analyze theoretically. 
+			In <a href="https://proceedings.neurips.cc/paper/2021/hash/14faf969228fc18fcd4fcf59437b0c97-Abstract.html">this work</a> 
+			with Maksim Velikanov we have shown, however, that under 
+			some reasonably general assumptions on the target function one can rather accurately describe the asymptotic evolution of the loss
+			under gradient descent in the <a href="https://en.wikipedia.org/wiki/Neural_tangent_kernel">NTK regime</a>. 
+						
+		</p>
+		</div>
+		
+		<div>
+		<aside>
+			<img title="Network embedding overview" alt="Network overview"
+				src="pics/universalScaling8.png" hspace="0"
+				align="right" border="0" width="300">
+		</aside>	
+			
+			The asymptotic behavior is given by a power law \(L(t)\sim Ct^\xi\), where not only the exponent \(\xi\) but also the 
+			coefficient \(C\) can be written analytically. Our assumptions roughly say that the data distribution \(\mu\) is smooth and generic while 
+			the target is characterized by singularities of "particular order and extent". The exponent \(\xi\) is then universal in the sense that it is 
+			only determined by the dimension of data and the type of singularity in the target and the network activation. The coefficient \(C\) is more complicated, but can still be written 
+            in terms of some integral expressions. For example, if the target belongs to the class of indicator functions of domains \(\Omega\subset\mathbb R^d\) 
+			with smooth boundary, the loss evolves by
+			\[L(t)\sim\int_{\partial\Omega} (\mu(\mathbf x)\widetilde{\theta}_{\mathbf x}(\mathbf n))^{-\frac{1}{d+\alpha}}dS
+            \cdot \tfrac{1}{2\pi}\Gamma(\tfrac{1}{d+\alpha}+1)\cdot(2t)^{-\frac{1}{d+\alpha}},\]
+            with some homogeneous function \(\widetilde{\theta}_{\mathbf x}\) and value \(\alpha\) determined by the activation function and network architecture.  
+		</div>	
+		</div>
+			
+		<h4>Phase diagram of approximation rates for deep ReLU networks</h4>
+		<aside>
+			<img title="phaseDiag1" alt="Network overview"
+				src="pics/phaseDiag1.png" hspace="0"
+				align="right" border="0" width="450">
+		</aside>
+			
+			<p>
+			In <a href="https://proceedings.neurips.cc/paper/2020/file/979a3f14bae523dc5101c52120c535e9-Paper.pdf">this work</a> 
+			we describe a complete phase diagram of approximation rates for deep ReLU networks. We assume that the target function \(f\) 
+			belongs to a Hölder ball \(F_{r,d}\) that, roughly speaking, consists of \(d\)-variate functions having bounded derivatives up to order \(r\). 
+			We then ask for which exponents \(p\) we can find approximations \(\widetilde f_W\) of such \(f\) by ReLU networks with \(W\) 
+			weights so that \(\|f-\widetilde f_W\|_\infty=O(W^{-p})\) as \(W\to\infty\).  
+			</p>
+			<p>
+			It turns out that there are two very different regimes. The "slower" regime provides approximation rates up to \(p=\tfrac{r}{d}\). 
+			This regime can be implemented by relatively shallow networks, and so that their weights depend continuously on the target. 
+			This regime is rather similar to classical linear approximation methods such as spline or Fourier expansion.    
+			</p>
+			<p>
+			The "faster" regime is based on an entirely different idea of "weight encoding" (rather than linear constructions). 
+			This regime can provide approximation rates up to \(p=\tfrac{2r}{d}\). It requires network depths 
+			to grow as a power law in \(W\); in particular, at \(p=\tfrac{2r}{d}\) the network size fully "goes into the depth" rather than the width.
+			The weight precision also must grow as a power law in \(W\). The weight assignment in this regime is fundamentally discontinuous.
+			</p>
+		
+		<div>	
+		<p>	
+		<aside>
+			<img title="invariant new"
+				src="pics/365_2021_9546_Fig3_HTML.webp" hspace="0"
+				align="right" border="0" width="400">
+		</aside>
+			
+		
+		<h4>Universal approximation of invariant maps</h4>
+			<p>
+			An important idea in machine learning is to exploit the natural <i>invariance</i> (or more generally, <i>equivariance</i>) 
+			of target maps with respect to various groups of transformations (e.g., shifts, rotations, reflections, etc.). 
+			Building the relevant symmetry into the models generally makes them more efficient in terms of accuracy, complexity or training time. 
+			A standard example is the <a href="https://en.wikipedia.org/wiki/Convolutional_neural_network">convolutional networks</a> 
+			that are designed to be invariant with respect to grid translations.      
+			</p>
+			<p>
+			In <a href="https://link.springer.com/article/10.1007/s00365-021-09546-1">this paper</a> I analyzed neural networks that are <i>invariant and universal</i> 
+			with respect to various groups of transformations. This means that the network must be not only invariant, but also capable of approximating 
+			any invariant map. This question is especially subtle in the case of groups such as the Euclidean rotation group, because it cannot be exactly 
+			implemented on finite grids on which the data is usually defined. It turns out that one can still rigorously describe neural network-type 
+			models that are provably <i>invariant and universal</i> even for this group, by considering a suitable limiting process 
+			(specifically, a map on the space of signals on \(\mathbb R^2\) is continuous and SE(2)-equivariant if and only if it can be approximated 
+			by models of suitable architecture in the limit of infinitely detailed discretization).
+			</p>
+		</p>
+		</div>
+
+		<p>
+		<h4>Discontinuous weight selection and emergence of subprograms</h4>
+		<aside>
+			<img title="Network embedding overview" alt="Network overview"
+				src="pics/embedOverview_crop.png"  hspace="0"
+				align="right" border="0" width="340">
+		</aside>
+		<aside style="clear: both;">
+			<img title="Embedding of a subprogram"
+				alt="Embedding of a subprogram" src="pics/embedf2_crop.png"
+				hspace="0" align="right" border="0" width="340">
+		</aside>
+		
+
+		There is a general DeVore-Howard-Micchelli theorem establishing upper
+		bounds on approximation rates of any parameterized approximation model
+		(for example, a neural network) under assumption of continuous
+		parameter selection. However, if the assumption of continuity is
+		dropped, deep neural nets with a rather standard (but deep!)
+		architecture and the standard ReLU activation function can surpass
+		these bounds. This can be achieved by speeding up the computation with
+		something like <i>subprograms</i>, see <a
+			href="https://arxiv.org/abs/1705.01365">this paper</a>. This
+		construction is inspired by a construction used by Shannon in
+		his work on Boolean circuits.
+		</p>
+		
+		<p>
+		<h4 style="clear: both;">Fast approximation of smooth functions
+			with deep ReLU networks</h4>
+		<aside>
+			<div>
+				<img title="Squaring net" alt="Squaring net" src="pics/squaring_net_crop.png"
+					height="101" hspace="0" align="left" border="0" width="200" style="margin-top:15px; margin-bottom:15px; ">
+				<img title="Approximations by squaring nets" alt="Approximations by squaring nets"
+					src="pics/approx_x2_crop.png" height="131" hspace="0" align="right"
+					border="0"  width="129">
+			</div>
+		</aside>
+		Smooth functions can be typically approximated more efficiently than
+		non-smooth functions. Usually, this is achieved by 
+		choosing an approximating model of appropriate smoothness (e.g., using cubic
+		splines rather than linear splines if the approximated function is
+		smooth). However, deep neural networks can provide efficient (in a
+		sense, optimal) approximation rates for smooth functions even if their
+		activation function is only piecewise-linear (standard ReLU), see 
+		<a href="http://www.sciencedirect.com/science/article/pii/S0893608017301545">the paper</a>  
+		(<a href="https://arxiv.org/abs/1610.01145">preprint</a>).
+		<h3>Voxel features for 3D shape recognition</h3>
+		I have written a small <a
+			href="https://github.com/yarotsky/voxelfeatures">library</a> for
+		computation of various geometric features of voxelized 3D shapes.
+		These features can be used in automated classification of 3D shapes,
+		e.g. by training an XGBoost classifier; see <a
+			href="https://arxiv.org/abs/1701.04249">the paper</a>.
+		<div class="crop" align="right">
+			<img title="feature examples" alt="feature examples"
+				src="pics/featureExamples50.png" height="260" vspace="0"
+				align="left" border="10" width="472" style="border-color: white">
+			<img title="predictions" alt="predictions"
+				src="pics/predictions260.png" height="260" vspace="0" align="left"
+				border="10" width="390" style="border-color: white">
+		</div>
+		</p>
+		
+		<h3>Space tether systems</h3>
+		<aside>
+			<iframe width="480" height="300"
+				src="http://www.youtube.com/embed/62vSml6nXws?autoplay=0">
+			</iframe>
+		</aside>
+		<p>
+			<a href="https://en.wikipedia.org/wiki/Space_tether">Space tether
+				systems</a> is an interesting class of systems, potentially useful for
+			various purposes such as space debris removal, satellite collocation,
+			etc. In <a
+				href="http://www.sciencedirect.com/science/article/pii/S0094576515003276">
+				this</a> joint work with our Astrium colleagues we studied a
+			"hub-and-spoke" pyramidal formation rotating about a central
+			satellite and holding another satellite beneath it. Unfortunately,
+			this configuration requires a relatively high fuel consumption.
+		</p>
+		<p>
+			So, in <a href="http://arxiv.org/abs/1603.05244">this paper</a> we
+			proposed another, <i>freely moving</i> (no fuel!) formation serving
+			the same purpose. Instead of a circle, deputy satellites now move
+			along Lissajous curves. We find relations between the system's
+			parameters ensuring that the satellites and tethers never collide and
+			the main satellite remains immobile, and show how all these relations
+			can be satisfied.
+		</p>
+		<p>
+			Interestingly, the model seems to be especially stable if there are
+			at least 5 deputy satellites. Also interestingly, the tethers can get
+			entangled during operation; we have been able to only partially
+			demarcate the cases of absent or present entanglement (based on the <a
+				href="https://en.wikipedia.org/wiki/Winding_number">winding
+				number</a> invariant).
+		</p>
+
+		<h3>Surrogate Based Optimization (SBO)</h3>
+		<aside>
+			<div class="crop" align="right">
+				<img title="A trajectory missing the global optimum"
+					alt="A trajectory missing the global optimum"
+					src="pics/density_fail.gif" height="240" hspace="0" align="right"
+					border="0" width="330"> <img title="A dense trajectory"
+					alt="A dense trajectory" src="pics/SBO.gif" height="240" hspace="0"
+					align="right" border="0" width="330">
+
+			</div>
+		</aside>
+		<p>
+			In <a
+				href="https://www.datadvance.net/blog/tech-tips/2015/notes-on-surrogate-based-optimization.html">this
+				post</a> I tried to explain in simple terms the idea of SBO and its most
+			natural version based on Expected Improvement (EI).
+		</p>
+		<p>
+			My research in this area concerned the following question: can
+			EI-based SBO fail, in the sense of never getting near the true global
+			optimum? The expected answer is "yes", but the proof is not obvious
+			because the behavior of SBO trajectories is not well understood on a
+			rigorous level. Nevertheless, in <a
+				href="http://arxiv.org/abs/1109.1320">this paper</a> I give a
+			rigorous example of failure in a sort of "analytic black hole"
+			scenario.
+		</p>
+
+		<h3>Interpolation</h3>
+
+		Explicit error formulas seem to be rare in the approximation theory.
+		One well-known example is the beautiful integral error formula for the
+		common <a
+			href="https://en.wikipedia.org/wiki/Polynomial_interpolation">polynomial
+			interpolation</a> with \(N\) knots \(x_1,\ldots,x_N\):
+		\[f(x)-\widehat{f}(x)=\frac{\prod_{n=1}^N (x-x_n)}{N!} \int_{s_n\ge 0,
+		\sum_{n=0}^N s_n=1} \frac{d^N f}{dx^N}\Big(\sum_{n=0}^N s_n x_n \Big)
+		d\mathbf{s},\] where \(x\equiv x_0\). This formula immediately
+		implies, for example, that the interpolants converge to the true
+		function if it is analytic in a sufficiently large domain. In <a
+			href="http://arxiv.org/abs/1205.5961">this paper</a> I show that this
+		formula can be generalized to interpolation by exponential or Gaussian
+		functions using the Harish-Chandra-Itzykson-Zuber integral; in
+		particular, for Gaussian basis functions \(e^{-(x-x_n)^2/2}\) \[f(x)-
+		\widehat{f}(x) = \frac{ \prod_{n=1}^N (x-x_n) }{ N! Z} \int_{S^{2N+1}}
+		\int_{\mathbb{U}(N)} e^{\mathrm{tr}(X U^{\dagger}
+		P_\mathbf{v}^{\dagger} \widetilde{X} P_\mathbf{v} U)}
+		e^{-\frac{x^2}{2}}\Big[\prod_{n=1}^N \big(\frac{d}{dq}-x_n\big)\Big]
+		e^{\frac{q^2}{2}}f(q)\Big|_{q = \mathbf{v}^{\dagger}
+		\widetilde{X}\mathbf{v}} d\mathbf{v}dU\] Though this expression looks
+		complicated, it can be used to prove convergence of interpolants
+		almost as easily as in the polynomial case. This result does not seem
+		to generalize to more general radial basis functions; e.g. the proof
+		breaks down even for basis functions of the form \(\sum_{k} c_k
+		e^{-(x-x_n)^2/a_k}\). The HCIZ integral is well known in the random
+		matrix theory, representation theory and quantum field theory; it is
+		interesting that it also has applications to the interpolation theory.
+
+		<h3>Quantum Spin Systems</h3>
+
+		My research in this area mostly concerned rigorous analysis of ground
+		states with the help of cluster expansions.
+
+		<aside>
+			<img title="The AKLT state" alt="The AKLT state"
+				src="pics/AKLT_fig_eng-1.png" height="55" vspace="10" align="right"
+				border="0" width="276">
+		</aside>
+
+		<p>
+			In <a href="http://arxiv.org/abs/math-ph/0412040">this paper</a> I
+			developed a quadratic form-based perturbation theory and used it to
+			prove that small perturbations of the <a
+				href="https://en.wikipedia.org/wiki/AKLT_model">AKLT model</a>
+			remain gapped (which was widely believed, but hard to prove).
+		</p>
+		<p>
+			In <a
+				href="http://link.springer.com/article/10.1007%2Fs10955-004-8780-x">this
+				paper</a> (<a href="uniqueness1.pdf">preprint</a>) I prove uniqueness of
+			the ground state of a weakly interacting system in a strong sense
+			involving "most general quantum boundary conditions", and discuss how
+			one can interprete these conditions.
+		</p>
+		<aside>
+			<img title="Random walk with a single reversal"
+				alt="Random walk with a single reversal"
+				src="pics/c-ic_fig2_short-1.png" height="97" vspace="0"
+				align="right" border="0" width="201">
+		</aside>
+		<p>
+			In <a
+				href="http://link.springer.com/article/10.1007%2Fs10955-007-9458-y">this
+				paper</a> (<a href="C-ICtrans_v2.pdf">preprint</a>) I show that the
+			so-called "commensurate-incommensurate transition" in the AKLT model
+			can be explained by a peculiar Poisson-type random walk with a single reversal.
+		</p>
+      <div>
+		<h3>My industrial experience</h3>
+		<aside>
+			<img title="SMES" alt="SMES" src="pics/smes.png" height="247"
+				vspace="0" align="right" border="0" width="472">
+		</aside>
+		At Datadvance, I was one of the developers of the <a
+			href="https://www.datadvance.net/product/pseven-core/">Macros/pSeven
+			Core library</a> and other custom software for optimization and
+		predictive modeling. This software is used at a number of major
+		engineering companies, e.g. <a
+			href="http://www.airbus.com/presscentre/pressreleases/press-release-detail/detail/airbus-to-reduce-lead-times-in-numerical-analysis-activities-for-aircraft-design/">at
+			Airbus</a>. Our toolbox of regression methods is described in <a
+			href="https://arxiv.org/abs/1609.01088">this paper</a>.
+		<aside>
+			<img title="Decision tree" alt="Decision tree"
+				src="pics/decision_tree_vers16_200px.png" height="239" vspace="0"
+				align="right" border="0" width="200"> <img title="wing"
+				alt="wing" src="pics/wingTruePred_95perc_cropped.png" height="242.5"
+				vspace="0" align="right" border="0" width="472">
+		</aside>
+		</div>
+	</div>
+	<p></p>
+	<h3></h3>
+	<script type="text/javascript" src="top.js"></script>
+	<p></p>
+</body>
+</html>

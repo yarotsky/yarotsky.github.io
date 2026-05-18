@@ -1,0 +1,10 @@
+/* css styles */
+
+/* Do not highlight the active TOC item in blue */
+#TOC .nav-link.active,
+#TOC .nav-link.show,
+.sidebar nav[role="doc-toc"] .nav-link.active {
+  color: inherit !important;
+  font-weight: normal !important;
+  border-left: none !important;
+}
