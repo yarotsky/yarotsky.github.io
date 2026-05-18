@@ -16,9 +16,29 @@ Below is some of my work.
 :::
 
 
-<!--
-### Learning regimes and loss evolution via diagram expansions - TODO
 
+### Learning regimes and loss evolution via diagram expansions 
+
+For nonlinear machine learning models, it is generally difficult to theoretically derive explicit gradient flow trajectories. 
+Moreover, while there are special regimes such as underparameterized, overparameterized, NTK, mean-field, etc., 
+in which the model may be solvable, there seems to be no general classification of these regimes. 
+
+We propose such a classification based on small-$t$ power-series expansion of the loss evolution [@yarotsky2026gradient]:
+$$L(t)\sim\sum_{s=0}^{\infty}(\tfrac{1}{2}D-R)^{\star(s+1)}\frac{(-t)^s}{s!}$$
+The terms $D$ and $R$ correspond to self-interaction of the model and the model-target interaction, respectively. 
+For some problems such as fitting a tensor by a finite-rank approximation, 
+the terms of the expansion have a suggestive interpretation as *diagrams* (akin to [Feynman diagrams](https://en.wikipedia.org/wiki/Feynman_diagram)). 
+There is a "diagram calculus" describing various operations with the power series coefficients. 
+Different types of diagrams correspond to different problems or extreme learning regimes. 
+
+![ ](pics/diagrams_compr.jpg){width=80% fig-align="center"}
+
+In some cases, the series of diagrams can be summed to produce results well matching the experiment.
+
+![ ](pics/loss_evol_compr.jpg){width=90% fig-align="center"}   
+
+
+<!--
 ### Corner Gradient Descent  - TODO
 
 ### (S)GD with general linear memory - TODO
@@ -200,10 +220,9 @@ entangled during operation; we have been able to only partially
 demarcate the cases of absent or present entanglement (based on the [winding
 number](https://en.wikipedia.org/wiki/Winding_number) invariant).
 
-<iframe width="480" height="300"
-src="http://www.youtube.com/embed/62vSml6nXws?autoplay=0">
-referrerpolicy="strict-origin-when-cross-origin"
-</iframe>
+![ ](pics/EntanglementAB-eps-converted-to.png){width=70% fig-align="center"}
+
+[Watch the animation on YouTube](https://www.youtube.com/watch?v=62vSml6nXws)
 
 
 ### Surrogate Based Optimization (SBO)

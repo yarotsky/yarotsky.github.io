@@ -133,7 +133,8 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#learnability-of-high-dimensional-targets-by-two-parameter-models" id="toc-learnability-of-high-dimensional-targets-by-two-parameter-models" class="nav-link active" data-scroll-target="#learnability-of-high-dimensional-targets-by-two-parameter-models">Learnability of high-dimensional targets by two-parameter models</a></li>
+  <li><a href="#learning-regimes-and-loss-evolution-via-diagram-expansions" id="toc-learning-regimes-and-loss-evolution-via-diagram-expansions" class="nav-link active" data-scroll-target="#learning-regimes-and-loss-evolution-via-diagram-expansions">Learning regimes and loss evolution via diagram expansions</a></li>
+  <li><a href="#learnability-of-high-dimensional-targets-by-two-parameter-models" id="toc-learnability-of-high-dimensional-targets-by-two-parameter-models" class="nav-link" data-scroll-target="#learnability-of-high-dimensional-targets-by-two-parameter-models">Learnability of high-dimensional targets by two-parameter models</a></li>
   <li><a href="#elementary-superexpressive-activations" id="toc-elementary-superexpressive-activations" class="nav-link" data-scroll-target="#elementary-superexpressive-activations">Elementary superexpressive activations</a></li>
   <li><a href="#phase-diagram-of-approximation-rates-for-deep-relu-networks" id="toc-phase-diagram-of-approximation-rates-for-deep-relu-networks" class="nav-link" data-scroll-target="#phase-diagram-of-approximation-rates-for-deep-relu-networks">Phase diagram of approximation rates for deep ReLU networks</a></li>
   <li><a href="#universal-approximation-of-invariant-maps" id="toc-universal-approximation-of-invariant-maps" class="nav-link" data-scroll-target="#universal-approximation-of-invariant-maps">Universal approximation of invariant maps</a></li>
@@ -188,13 +189,29 @@ window.Quarto = {
 </div>
 </div>
 </div>
+<section id="learning-regimes-and-loss-evolution-via-diagram-expansions" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="learning-regimes-and-loss-evolution-via-diagram-expansions">Learning regimes and loss evolution via diagram expansions</h3>
+<p>For nonlinear machine learning models, it is generally difficult to theoretically derive explicit gradient flow trajectories. Moreover, while there are special regimes such as underparameterized, overparameterized, NTK, mean-field, etc., in which the model may be solvable, there seems to be no general classification of these regimes.</p>
+<p>We propose such a classification based on small-<span class="math inline">\(t\)</span> power-series expansion of the loss evolution <span class="citation" data-cites="yarotsky2026gradient">(<a href="#ref-yarotsky2026gradient" role="doc-biblioref">Yarotsky et al. 2026</a>)</span>: <span class="math display">\[L(t)\sim\sum_{s=0}^{\infty}(\tfrac{1}{2}D-R)^{\star(s+1)}\frac{(-t)^s}{s!}\]</span> The terms <span class="math inline">\(D\)</span> and <span class="math inline">\(R\)</span> correspond to self-interaction of the model and the model-target interaction, respectively. For some problems such as fitting a tensor by a finite-rank approximation, the terms of the expansion have a suggestive interpretation as <em>diagrams</em> (akin to <a href="https://en.wikipedia.org/wiki/Feynman_diagram">Feynman diagrams</a>). There is a “diagram calculus” describing various operations with the power series coefficients. Different types of diagrams correspond to different problems or extreme learning regimes.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-yarotsky2026gradient" class="csl-entry" role="listitem">
+Yarotsky, Dmitry, Eugene Golikov, and Yaroslav Gusev. 2026. <span>“Gradient Flow Through Diagram Expansions: Learning Regimes and Explicit Solutions.”</span> <em>arXiv Preprint arXiv:2602.04548</em>. <a href="https://arxiv.org/abs/2602.04548">https://arxiv.org/abs/2602.04548</a>.
+</div></div><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pics/diagrams_compr.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+<p>In some cases, the series of diagrams can be summed to produce results well matching the experiment.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pics/loss_evol_compr.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:90.0%"></p>
+</figure>
+</div>
 <!--
-### Learning regimes and loss evolution via diagram expansions - TODO
-
 ### Corner Gradient Descent  - TODO
 
 ### (S)GD with general linear memory - TODO
 --->
+</section>
 <section id="learnability-of-high-dimensional-targets-by-two-parameter-models" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="learnability-of-high-dimensional-targets-by-two-parameter-models">Learnability of high-dimensional targets by two-parameter models</h3>
 <p>In machine learning, it is usually expected that to learn objects forming a <span class="math inline">\(d\)</span>-dimensional manifold one needs a model with <span class="math inline">\(d\)</span> or more parameters. A larger number of parameters can in fact help to avoid spurious local minima and reach a good fit.</p>
@@ -296,9 +313,12 @@ Alary, D, K Andreev, P Boyko, et al. 2015. <span>“Dynamics of Multi-Tethered P
 Yarotsky, D, V Sidorenko, and D Pritykin. 2016. <span>“Three-Dimensional Multi-Tethered Satellite Formation with the Elements Moving Along Lissajous Curves.”</span> <em>Celestial Mechanics and Dynamical Astronomy</em> 125 (3): 309–32. <a href="https://link.springer.com/article/10.1007/s10569-016-9683-2">https://link.springer.com/article/10.1007/s10569-016-9683-2</a>.
 </div></div><p>So, in <span class="citation" data-cites="yarotsky2016three">(<a href="#ref-yarotsky2016three" role="doc-biblioref">Yarotsky et al. 2016</a>)</span> we proposed another, <em>freely moving</em> (no fuel!) formation serving the same purpose. Instead of a circle, deputy satellites now move along Lissajous curves. We find relations between the system’s parameters ensuring that the satellites and tethers never collide and the main satellite remains immobile, and show how all these relations can be satisfied.</p>
 <p>Interestingly, the model seems to be especially stable if there are at least 5 deputy satellites. Also interestingly, the tethers can get entangled during operation; we have been able to only partially demarcate the cases of absent or present entanglement (based on the <a href="https://en.wikipedia.org/wiki/Winding_number">winding number</a> invariant).</p>
-<iframe width="480" height="300" src="http://www.youtube.com/embed/62vSml6nXws?autoplay=0">
-referrerpolicy=“strict-origin-when-cross-origin”
-</iframe>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pics/EntanglementAB-eps-converted-to.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%"></p>
+</figure>
+</div>
+<p><a href="https://www.youtube.com/watch?v=62vSml6nXws">Watch the animation on YouTube</a></p>
 </section>
 <section id="surrogate-based-optimization-sbo" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="surrogate-based-optimization-sbo">Surrogate Based Optimization (SBO)</h3>
