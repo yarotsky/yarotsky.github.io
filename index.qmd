@@ -11,7 +11,7 @@ Email to: yarotsky at Google mail.
 Below is some of my work.
 :::
 ::: {.column width="35%"}
-![ ](pics/photo1.jpg){width=50% fig-align="center"}
+![ ](pics/photo2.png){width=50% fig-align="center"}
 :::
 :::
 
@@ -43,6 +43,39 @@ In some cases, the series of diagrams can be summed to produce results well matc
 
 ### (S)GD with general linear memory - TODO
 --->
+
+
+### Acceleration of Gradient Descent on ill-conditioned quadratic problems 
+
+A fundamental topic for machine-learning and some other fields is gradient-based numerical minimization of quadratic functions 
+$L(\mathbf w)=\tfrac{1}{2}\mathbf w^\top \mathbf H\mathbf w-\mathbf w^\top \mathbf b$. 
+Real-life quadratic functions are typically *ill-conditioned*, i.e. have a large ratio $\frac{\lambda_{\max}}{\lambda_{\min}}$ 
+between the maximum and minimum eigenvalues of $\mathbf H$. 
+The difficulty in optimizing ill-conditioned objectives is the conflict between optimal learning rates for large and small eigenvalues: 
+large eigenvalues require small learning rates to avoid divergence in respective eigenspaces, 
+while for small eigenvalues these small learning rates slow down optimization.
+
+Theoretically, it is convenient to describe high-dimensional ill-conditioned problems by *spectral power laws*. 
+Let $\lambda_k$ be the $k$'th largest eigenvalue and $c_k$ be the respective eigencoefficient of the minimizer $\mathbf w_*=\mathbf H^{-1}\mathbf b$.
+We can then assume that there are two exponents $\nu, \zeta$ that describe the decay of eigenvalues and the spectral measure of $\mathbf w_*$:
+\begin{align}
+\lambda_k\propto{}& k^{-\nu},\quad k\to\infty\\
+\sum_{k:\lambda<\lambda}\lambda_k c_k^2\propto{}& \lambda^{-\zeta},\quad \lambda\searrow 0. 
+\end{align}
+It is easy to check that under these conditions (in fact, only the second condition matters) plain gradient descent with a constant learning rate converges as 
+$$L(\mathbf w_t)\propto t^{-\zeta}.$$
+This convergence can be accelerated by using multi-step algorithms or non-constant learning rates, e.g.
+$$\mathbf w_{t+1}=\mathbf w_t-\alpha_t\nabla L(\mathbf w_t)+\beta_t(\mathbf w_{t}-\mathbf w_{t-1}).$$
+This acceleration question has been studied by multiple authors starting from Nemirovsky and Polyak in 1980's. 
+In our paper [@velikanov2024tight] we filled some gaps in prior results, obtaining a more or less complete picture of *tight* convergence bounds 
+in a range of different general scenarios. 
+In the table below, the exponents $\zeta, 2\zeta, (2+\nu)\zeta$ are optimal for the respective cells, i.e. cannot be improved in general. 
+In the multi-step/adaptive-learning-rate scenario, the exponent $2\zeta$ holds if the eigenvalue decay condition is not assumed. 
+  
+![ ](pics/acceleration_table.png){width=90% fig-align="center"}
+
+ 
+
 
 ### Learnability of high-dimensional targets by two-parameter models
 
