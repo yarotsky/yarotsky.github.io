@@ -11,7 +11,7 @@ Email to: yarotsky at Google mail.
 Below is some of my work.
 :::
 ::: {.column width="35%"}
-![ ](pics/photo2.png){width=50% fig-align="center"}
+![ ](pics/photo2.jpg){width=50% fig-align="center"}
 :::
 :::
 
@@ -40,12 +40,47 @@ In some cases, the series of diagrams can be summed to produce results well matc
 
 <!--
 ### Corner Gradient Descent  - TODO
-
-### (S)GD with general linear memory - TODO
 --->
 
+### (S)GD with general linear memory: overcoming the failure of standard momentum schedule
 
-### Acceleration of Gradient Descent on ill-conditioned quadratic problems 
+While non-stochastic spectral optimization algorithms such as plain Gradient Descent and Heavy Ball have fairly regular
+[convergence and acceleration properties](#sec:acc_quad) that can be derived
+by analyzing respective residual polynomials, mini-batch Stochastic GD is much more subtle because of complex noise accumulation effects. 
+In ill-conditioned problems with power-law spectra ([-@eq-spectral-power-laws]), plain SGD with constant learning rate diverges unless 
+the eigenvalue decay is sufficiently fast. Moreover, as found out by 
+[Berthier et al. (2020)](https://proceedings.neurips.cc/paper_files/paper/2020/hash/1b33d16fc562464579b7199ca3114982-Abstract.html), 
+there are two convergent regimes depending on which of $\zeta$ and $2-1/\nu$ is larger. If $\zeta < 2-1/\nu,$ then the effect of sampling noise is weak,
+ and SGD converges with the same exponent $\zeta$ as non-stochastic GD. In contrast, if $\zeta > 2-1/\nu,$ then the noise effects dominate, 
+and the convergence exponent drops to $2-1/\nu$.  
+
+::: {style="text-align: center;"}
+![ ](pics/phase_diag_SGD.png){width=40% fig-align="center"}
+![ ](pics/SGD_divergence.png){width=30% fig-align="center"}
+:::
+
+While plain GD can be accelerated to exponent $2\zeta$ using momentum with a "Jacobi-type" schedule, this strategy fails for stochastic GD: 
+optimization eventually diverges due to noise accumulation.
+
+In [@yarotsky2025sgd] we consider stationary generalizations of (S)GD with arbitrary "linear memory": 
+$$\mathbf w_{t+M+1}=\sum_{m=0}^M p_m\mathbf w_{t+m}+\sum_{m=0}^M q_m\nabla L(\mathbf w_{t+m}),\quad t=0,1,\ldots$${#eq-gd-with-memory}
+We show that all these algorithms have the above phase diagram, but the leading term of the loss has a coefficient sensitively depending on the algorithm.
+In particular, in the "signal-dominated" phase $\zeta<2-1/\nu$ this coefficient is determined by the *effective learning rate* $\alpha_{\mathrm{eff}}$ and a 
+*total noise coefficient* $U_\Sigma$:
+$$L_t=\textcolor{red}{\frac{\alpha_{\mathrm{eff}}^{-\zeta}}{1-U_\Sigma}}Q\Gamma(\zeta+1)2^{-\zeta-1}(1+o(1))\textcolor{blue}{t^{-\zeta}}.$$
+The effective learning rate can be expressed through the *frequency response function* $\Psi$ of the algorithm:
+$$\alpha_{\mathrm{eff}}=-\frac{1}{\Psi'(1)},\quad \Psi(\mu)=\frac{\mu^{M+1}-\sum_{m=0}^{M}p_m \mu^m}{\sum_{m=0}^{M}q_m \mu^m}.$$ 
+This finding reveals that to accelerate convergence of SGD, we need to increase the effective learning rate $\alpha_{\mathrm{eff}}$ 
+while keeping the total noise coefficient $U_\Sigma$ below 1. It turns out that if we only include a standard momentum term, 
+then the effective learning rate is limited and so the loss convergence can only be improved by a constant factor.
+This explains the failure of the Heavy Ball with Jacobi schedule for stochastic GD. 
+However, by considering a slightly more general scheme within the broad family ([-@eq-gd-with-memory]) one can indefinitely increase $\alpha_{\mathrm{eff}}$ 
+while keeping  $U_\Sigma<1$. A quasi-stationary schedule derived in this way indeed shows a stable acceleration of SGD.  
+
+![ ](pics/AM1.png){width=30% fig-align="center"} 
+
+
+### Acceleration of Gradient Descent on ill-conditioned quadratic problems {#sec:acc_quad}
 
 A fundamental topic for machine-learning and some other fields is gradient-based numerical minimization of quadratic functions 
 $L(\mathbf w)=\tfrac{1}{2}\mathbf w^\top \mathbf H\mathbf w-\mathbf w^\top \mathbf b$. 
@@ -58,10 +93,10 @@ while for small eigenvalues these small learning rates slow down optimization.
 Theoretically, it is convenient to describe high-dimensional ill-conditioned problems by *spectral power laws*. 
 Let $\lambda_k$ be the $k$'th largest eigenvalue and $c_k$ be the respective eigencoefficient of the minimizer $\mathbf w_*=\mathbf H^{-1}\mathbf b$.
 We can then assume that there are two exponents $\nu, \zeta$ that describe the decay of eigenvalues and the spectral measure of $\mathbf w_*$:
-\begin{align}
+$$\begin{align}
 \lambda_k\propto{}& k^{-\nu},\quad k\to\infty\\
-\sum_{k:\lambda<\lambda}\lambda_k c_k^2\propto{}& \lambda^{-\zeta},\quad \lambda\searrow 0. 
-\end{align}
+\sum_{k:\lambda_k<\lambda}\lambda_k c_k^2\propto{}& \lambda^{-\zeta},\quad \lambda\searrow 0. 
+\end{align}$${#eq-spectral-power-laws}
 It is easy to check that under these conditions (in fact, only the second condition matters) plain gradient descent with a constant learning rate converges as 
 $$L(\mathbf w_t)\propto t^{-\zeta}.$$
 This convergence can be accelerated by using multi-step algorithms or non-constant learning rates, e.g.
@@ -278,7 +313,7 @@ scenario [@yarotsky2013examples].
 ![ ](pics/SBO.gif){width=45% fig-align="center"}
 :::
 
-### Interpolation
+### Gaussian interpolation
 
 Explicit error formulas seem to be rare in the approximation theory.
 One well-known example is the beautiful integral error formula for the
